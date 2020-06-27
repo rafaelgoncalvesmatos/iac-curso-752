@@ -4,7 +4,7 @@
     - name: FIREWALL - Copy script
       file:
         src: /opt/iptables/firewall
-        dest: /etc/init.d
+        dest: /etc/init.d/
         mode: 744
 
     - name: Enable service httpd, and not touch the state
