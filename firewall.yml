@@ -1,0 +1,8 @@
+- hosts: security
+  become: true
+  tasks:
+    - name: FIREWALL - Copy script
+      file:
+        path: /opt/iptables/firewall
+        dest: /etc/init.d
+        mode: 744
