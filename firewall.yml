@@ -3,6 +3,15 @@
   tasks:
     - name: FIREWALL - Copy script
       file:
-        path: /opt/iptables/firewall
+        src: /opt/iptables/firewall
         dest: /etc/init.d
         mode: 744
+
+    - name: FIREWALL - Service is started
+      sysvinit:
+        name: firewall
+        state: started
+        enabled: yes
+
+    - name: FIREWALL - Enable firewall
+      shell: "/etc/init.d/firewall start"
