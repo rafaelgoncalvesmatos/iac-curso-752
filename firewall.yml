@@ -7,10 +7,18 @@
         dest: /etc/init.d/
         mode: 744
 
-    - name: Enable service httpd, and not touch the state
+    - name: FIREWALL - Copy rules
+      template:
+        src: rules
+        dest: /opt/iptables/
+        mode: 644
+
+    - name: FIREWALL - Service enable firewall
       service:
         name: firewall
         enabled: yes
 
-    - name: FIREWALL - Enable firewall
-      shell: "sudo /etc/init.d/firewall start"
+    - name: FIREWALL - Service start firewall
+      service:
+        name: firewall
+        state: started
