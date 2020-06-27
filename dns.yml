@@ -1,0 +1,38 @@
+- hosts: web01
+  become: true
+  tasks:
+    - name: DNS - Install package
+      package:
+        name: { { item } }
+        state: present
+      with_items:
+        - bind9
+        - dnsutils
+
+    - name: DNS - Enable service
+      systemd:
+        name: bind9
+        enabled: yes
+
+    - name: DNS - Editing resolv.conf
+      template:
+        src: resolv.conf
+        dest: /etc/
+        force: yes
+
+    - name: DNS - Bind zone config
+      copy:
+        src: /opt/dns/named.conf.local
+        dest: /etc/bind/
+        mode: 644
+
+    - name: DNS - Bind zone dexter
+      copy:
+        src: /opt/dns/db.dexter
+        dest: /var/cache/bind
+        mode: 644
+
+    - name: DNS - Started service
+      systemd:
+        name: bind9
+        state: restarted
