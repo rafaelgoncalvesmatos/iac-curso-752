@@ -26,19 +26,19 @@
         mode: 644
 
     - name: DNS - Bind zone options dexter
-      copy:
+      template:
         src: named.conf.options
         dest: /etc/bind/
         mode: 644
 
     - name: DNS - Bind zone dexter
-      copy:
+      template:
         src: db.dexter
         dest: "/var/cache/bind"
         mode: 644
 
     - name: DNS - Bind zone reverse dexter
-      copy:
+      template:
         src: rev.dexter
         dest: "/var/cache/bind"
         mode: 644
