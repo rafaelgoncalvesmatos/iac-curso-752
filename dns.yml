@@ -27,8 +27,8 @@
 
     - name: DNS - Bind zone dexter
       copy:
-        src: /opt/dns/db.dexter
-        dest: /var/cache/bind
+        src: "/opt/dns/db.dexter"
+        dest: "/var/cache/bind"
         mode: 644
 
     - name: DNS - Started service
