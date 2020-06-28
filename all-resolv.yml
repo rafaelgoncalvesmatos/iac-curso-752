@@ -6,6 +6,3 @@
         src: resolv.conf
         dest: /etc/
         force: yes
-
-    - name: DNS - Flush internal
-      shell: "rndc flush"
