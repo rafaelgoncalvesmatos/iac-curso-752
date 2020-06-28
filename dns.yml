@@ -20,14 +20,26 @@
         force: yes
 
     - name: DNS - Bind zone config
+      template:
+        src: named.conf.local.final
+        dest: /etc/bind/
+        mode: 644
+
+    - name: DNS - Bind zone options dexter
       copy:
-        src: /opt/dns/named.conf.local
+        src: named.conf.options
         dest: /etc/bind/
         mode: 644
 
     - name: DNS - Bind zone dexter
       copy:
-        src: "/opt/dns/db.dexter"
+        src: db.dexter
+        dest: "/var/cache/bind"
+        mode: 644
+
+    - name: DNS - Bind zone reverse dexter
+      copy:
+        src: rev.dexter
         dest: "/var/cache/bind"
         mode: 644
 
