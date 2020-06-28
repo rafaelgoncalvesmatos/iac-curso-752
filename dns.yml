@@ -40,7 +40,7 @@
         dest: "/var/cache/bind"
         user: bind
         group: bind
-        mode: 644
+        mode: 0644
 
     - name: DNS - Bind zone reverse dexter
       template:
