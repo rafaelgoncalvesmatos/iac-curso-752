@@ -1,0 +1,11 @@
+- hosts: all
+  become: true
+  tasks:
+    - name: DNS - Editing resolv.conf
+      template:
+        src: resolv.conf
+        dest: /etc/
+        force: yes
+
+    - name: DNS - Flush internal
+      shell: "rndc flush"
