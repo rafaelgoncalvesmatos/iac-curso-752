@@ -23,25 +23,32 @@
       template:
         src: named.conf.local.final
         dest: /etc/bind/
-        mode: 644
+        group: bind
+        mode: 0644
 
     - name: DNS - Bind zone options dexter
       template:
         src: named.conf.options
         dest: /etc/bind/
-        mode: 644
+        group: bind
+        group: bind
+        mode: 0644
 
     - name: DNS - Bind zone dexter
       template:
         src: db.dexter
         dest: "/var/cache/bind"
+        user: bind
+        group: bind
         mode: 644
 
     - name: DNS - Bind zone reverse dexter
       template:
         src: rev.dexter
         dest: "/var/cache/bind"
-        mode: 644
+        user: bind
+        group: bind
+        mode: 0644
 
     - name: DNS - Started service
       systemd:
