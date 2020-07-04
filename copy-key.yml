@@ -4,6 +4,11 @@
   gather_facts: False
   serial: "30%"
   tasks:
+    - name: Install package
+      apt:
+        name: sshpass
+        state: present
+        
     - name: File Password
       template:
         src: personal
