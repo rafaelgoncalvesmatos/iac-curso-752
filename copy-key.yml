@@ -4,12 +4,6 @@
   gather_facts: False
   serial: "30%"
   tasks:
-    - name: File Password
-      template:
-        src: personal
-        dest: ~/.personal
-        mode: 644
-
     - name: Configure access to all inventory hosts via SSH using Public Key
       shell: |
         ssh-keygen -R {{ inventory_hostname }}
