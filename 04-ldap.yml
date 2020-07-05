@@ -1,0 +1,38 @@
+- hosts: storage
+  become: true
+  tasks:
+    - name: LDAP - Install package
+      yum:
+        name: 
+          - slapd
+          - ldap-utils
+        state: present
+    
+    - name: LDAP - Stop
+      service:
+        name: sldapd
+        state: stopped
+
+    - name: LDAP - Base template
+      template:
+        src: "{{ item }}"
+        dest: "/var/lib/ldap/{{ item }}"
+        owner: openldap
+        group: openldap
+        mode: 0600
+      with_items:
+        - data.mdb
+        - lock.mdb
+
+    - name: LDAP - Search enable
+      template:
+        src: ldap.conf
+        dest: /etc/ldap/ldap.conf
+        owner: root
+        group: root
+        mode: 0644
+    
+    - name: LDAP - Start service
+      service:
+        name: sldapd
+        state: started
